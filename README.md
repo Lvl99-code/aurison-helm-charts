@@ -1,1 +1,0 @@
-# aurison-helm-charts
