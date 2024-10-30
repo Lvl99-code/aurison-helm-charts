@@ -12,5 +12,5 @@ spec:
       protocol: TCP
       name: websocket
   selector:
-    app.kubernetes.io/instance: aurison-prod-backend-ws
-    app.kubernetes.io/name: aurison-backend-ws
+    app: aurison-prod-backend-ws
+    app: aurison-backend-ws

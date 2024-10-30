@@ -41,6 +41,30 @@ service:
   type: ClusterIP
   port: 80
 
+aurisonBackend:
+  command: 
+    - sh
+    - -c
+    - python manage.py collectstatic --noinput ; python manage.py migrate ; python manage.py runserver 0.0.0.0:8000
+  resources:
+    limits:
+      memory: 2Gi
+    requests:
+      cpu: 600m
+      memory: 500Mi
+
+aurisonBackendWs:
+  command: 
+    - sh
+    - -c 
+    - python manage.py collectstatic --noinput ; python manage.py migrate ; daphne -b 0.0.0.0 -p 8001 asteris.asgi:application
+  resources:
+    limits:
+      memory: 2Gi
+    requests:
+      cpu: 100m
+      memory: 600Mi
+
 ingress:
   enabled: true
   annotations:
