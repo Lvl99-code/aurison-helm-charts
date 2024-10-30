@@ -3,13 +3,13 @@ entries:
   aurison-backend:
   - apiVersion: v2
     appVersion: v1.0.1
-    created: "2024-10-28T20:05:44.5248929+01:00"
+    created: "2024-10-30T18:07:50.1444386+01:00"
     description: Aurison Backend API
-    digest: 79e10cd4e4b938772357b9c0f7b1d6a09116f107222b6cb19c2d587c468b0ff3
+    digest: 1699096e6157f7708a50fd4df68a4c11b37370ca9b3b00611a93470ef74f51e0
     icon: https://www.aurison.app/static/media/logo.a42498c2.png
     name: aurison-backend
     type: application
     urls:
     - https://lvl99-code.github.io/aurison-helm-charts/aurison-backend-0.1.0.tgz
     version: 0.1.0
-generated: "2024-10-28T20:05:44.5218175+01:00"
+generated: "2024-10-30T18:07:50.1418735+01:00"
