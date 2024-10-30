@@ -29,6 +29,10 @@ spec:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
         - name: {{ .Chart.Name }}
+          commad: 
+            - sh
+            - -c
+            - python manage.py collectstatic --noinput ; python manage.py migrate ; python manage.py runserver 0.0.0.0:8000
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"

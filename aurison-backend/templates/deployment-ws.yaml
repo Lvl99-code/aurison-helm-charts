@@ -29,6 +29,10 @@ spec:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
         - name: {{ .Chart.Name }}
+          command: 
+            - sh
+            - -c 
+            - python manage.py collectstatic --noinput ; python manage.py migrate ; daphne -b 0.0.0.0 -p 8001 asteris.asgi:application
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
