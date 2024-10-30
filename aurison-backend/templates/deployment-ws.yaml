@@ -41,14 +41,6 @@ spec:
             - name: websocket
               containerPort: 8001
               protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /ws/
-              port: websocket
-          readinessProbe:
-            httpGet:
-              path: /ws/
-              port: websocket
           resources:
             {{- toYaml .Values.aurisonBackendWs.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
