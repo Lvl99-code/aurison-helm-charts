@@ -55,10 +55,7 @@ ingress:
         backend:
           serviceName: aurison-backend
           servicePort: 80
-      - path: /ws/
-        backend:
-          serviceName: aurison-backend-ws
-          servicePort: 80
+
   tls:
     - secretName: aurison-backend-tls
       hosts:

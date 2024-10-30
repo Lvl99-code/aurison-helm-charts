@@ -29,13 +29,13 @@ spec:
       http:
         paths:
           {{- range .paths }}
-          - path: /
+          - path: {{ .path }}
             pathType: Prefix
             backend:
               service:
-                name: {{ $fullName }}
+                name: {{ .backend.serviceName }}
                 port:
-                  number: {{ $svcPort }}
+                  number: {{ .backend.servicePort }}
           {{- end }}
     {{- end }}
   {{- end }}

@@ -1,7 +1,7 @@
 apiVersion: v2
-appVersion: v1.0.1
+appVersion: v1.0.2
 description: Aurison Backend API
 icon: https://www.aurison.app/static/media/logo.a42498c2.png
 name: aurison-backend
 type: application
-version: 0.1.0
+version: 0.1.1
