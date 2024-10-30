@@ -4,14 +4,16 @@ metadata:
   name: {{ include "aurison-backend.fullname" . }}-ws
   labels:
     {{- include "aurison-backend.labels" . | nindent 4 }}
+    app: aurison-prod-backend-ws
+    app: aurison-backend-ws
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      app.kubernetes.io/instance: aurison-prod-backend-ws
-      app.kubernetes.io/name: aurison-backend-ws
+      app: aurison-prod-backend-ws
+      app: aurison-backend-ws
   template:
     metadata:
       {{- with .Values.podAnnotations }}
