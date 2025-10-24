@@ -28,19 +28,6 @@ spec:
       serviceAccountName: {{ include "aurison-backend.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
-      initContainers:
-        - name: wait-for-backend
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          command:
-            - sh
-            - -c
-            - |
-              echo "Waiting for main backend to be ready..."
-              until nc -z {{ include "aurison-backend.fullname" . }} {{ .Values.service.port }}; do
-                echo "Backend not ready, waiting 5 seconds..."
-                sleep 5
-              done
-              echo "Backend is ready!"
       containers:
         - name: {{ .Chart.Name }}-ws
           command: 
