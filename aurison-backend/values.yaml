@@ -113,8 +113,8 @@ affinity: {}
 
 # mTLS Configuration for PACS edge devices
 mtls:
-  enabled: false  # Set to true to enable mTLS for PACS endpoints
+  enabled: true  # Set to true to enable mTLS for PACS endpoints
   # CA certificate content (will be base64 encoded automatically)
   # DO NOT PUT REAL CERTIFICATES HERE - use helm install --set-file
-  caCertificate: ""
-  caPrivateKey: ""
+  # caCertificate: ""
+  # caPrivateKey: ""
