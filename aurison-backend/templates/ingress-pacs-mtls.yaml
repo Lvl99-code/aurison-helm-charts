@@ -1,0 +1,52 @@
+{{- if and .Values.ingress.enabled .Values.aurisonBackendPacs.enabled .Values.mtls.enabled -}}
+{{- $fullName := include "aurison-backend.fullname" . -}}
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ $fullName }}-pacs-mtls
+  labels:
+    {{- include "aurison-backend.labels" . | nindent 4 }}
+  annotations:
+    {{- with .Values.ingress.annotations }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+    # mTLS specific annotations for NGINX
+    nginx.ingress.kubernetes.io/auth-tls-verify-client: "on"
+    nginx.ingress.kubernetes.io/auth-tls-secret: {{ .Release.Namespace }}/{{ $fullName }}-ca-cert
+    nginx.ingress.kubernetes.io/auth-tls-verify-depth: "1"
+    nginx.ingress.kubernetes.io/auth-tls-error-page: "https://{{ (index .Values.ingress.hosts 0).host }}/mtls-error"
+    # Pass client certificate info to backend
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      proxy_set_header X-SSL-Client-Certificate $ssl_client_escaped_cert;
+      proxy_set_header X-SSL-Client-Verify $ssl_client_verify;
+      proxy_set_header X-SSL-Client-S-DN $ssl_client_s_dn;
+    # WebSocket specific settings
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "86400"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "86400"
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: "60"
+spec:
+  {{- if .Values.ingress.tls }}
+  tls:
+    {{- range .Values.ingress.tls }}
+    - hosts:
+        {{- range .hosts }}
+        - {{ . | quote }}
+        {{- end }}
+      secretName: {{ .secretName }}
+    {{- end }}
+  {{- end }}
+  rules:
+    {{- range .Values.ingress.hosts }}
+    - host: {{ .host | quote }}
+      http:
+        paths:
+          - path: /ws/pacs/connect
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ $fullName }}-pacs
+                port:
+                  number: {{ $.Values.aurisonBackendPacs.servicePort | default 80 }}
+    {{- end }}
+{{- end }}

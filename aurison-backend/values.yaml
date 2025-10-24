@@ -46,24 +46,25 @@ aurisonBackend:
     - sh
     - -c
     - python manage.py collectstatic --noinput ; python manage.py migrate ; gunicorn --config gunicorn_config.py asteris.wsgi:application
-  resources:
-    limits:
-      memory: 2Gi
-    requests:
-      cpu: 600m
-      memory: 500Mi
+  resources: {}
 
 aurisonBackendWs:
   command: 
     - sh
     - -c 
-    - python manage.py collectstatic --noinput ; python manage.py migrate ; daphne -b 0.0.0.0 -p 8001 asteris.asgi:application
-  resources:
-    limits:
-      memory: 2Gi
-    requests:
-      cpu: 100m
-      memory: 600Mi
+    - daphne -b 0.0.0.0 -p 8001 asteris.asgi:application
+  resources: {}
+
+aurisonBackendPacs:
+  enabled: false  # Set to true to enable PACS WebSocket with mTLS
+  replicaCount: 1
+  port: 8001  # Same port as regular WebSocket if needed
+  servicePort: 80
+  command: 
+    - sh
+    - -c 
+    - daphne -b 0.0.0.0 -p 8001 asteris.asgi:application
+  resources: {}
 
 ingress:
   enabled: true
@@ -109,3 +110,11 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+# mTLS Configuration for PACS edge devices
+mtls:
+  enabled: false  # Set to true to enable mTLS for PACS endpoints
+  # CA certificate content (will be base64 encoded automatically)
+  # DO NOT PUT REAL CERTIFICATES HERE - use helm install --set-file
+  caCertificate: ""
+  caPrivateKey: ""
