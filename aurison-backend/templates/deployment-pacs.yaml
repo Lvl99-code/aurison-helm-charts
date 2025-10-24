@@ -73,7 +73,7 @@ spec:
       volumes:
         - name: ca-cert-volume
           secret:
-            secretName: {{ include "aurison-backend.fullname" . }}-ca-secret-cert
+            secretName: {{ if .Values.mtls.existingSecret }}aurison-backend-prod-ca-secret-cert{{ else }}{{ include "aurison-backend.fullname" . }}-ca-secret-cert{{ end }}
             items:
               - key: ca-certificate.pem
                 path: ca-certificate.pem
