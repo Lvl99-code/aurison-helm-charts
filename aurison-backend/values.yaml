@@ -74,7 +74,7 @@ ingress:
      kubernetes.io/ingress.class: nginx
      kubernetes.io/tls-acme: "true"
   hosts:
-    - host: backend.sharethe.net
+    - host: api.aurison.app
       paths:
       - path: /
         backend:
@@ -84,7 +84,7 @@ ingress:
   tls:
     - secretName: aurison-backend-tls
       hosts:
-        - backend.sharethe.net
+        - api.aurison.app
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
