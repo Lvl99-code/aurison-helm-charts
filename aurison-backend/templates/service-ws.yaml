@@ -12,5 +12,4 @@ spec:
       protocol: TCP
       name: websocket
   selector:
-    app: aurison-prod-backend-ws
     app: aurison-backend-ws

@@ -12,7 +12,6 @@ spec:
   {{- end }}
   selector:
     matchLabels:
-      {{- include "aurison-backend.selectorLabels" . | nindent 6 }}
       app: aurison-backend-pacs
   template:
     metadata:
@@ -21,7 +20,6 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "aurison-backend.selectorLabels" . | nindent 8 }}
         app: aurison-backend-pacs
     spec:
       {{- with .Values.imagePullSecrets }}
@@ -75,7 +73,7 @@ spec:
       volumes:
         - name: ca-cert-volume
           secret:
-            secretName: {{ include "aurison-backend.fullname" . }}-ca-cert
+            secretName: {{ include "aurison-backend.fullname" . }}-ca-secret-cert
             items:
               - key: ca-certificate.pem
                 path: ca-certificate.pem

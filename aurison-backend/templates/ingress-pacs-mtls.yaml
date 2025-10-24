@@ -13,7 +13,7 @@ metadata:
     {{- end }}
     # mTLS specific annotations for NGINX
     nginx.ingress.kubernetes.io/auth-tls-verify-client: "on"
-    nginx.ingress.kubernetes.io/auth-tls-secret: {{ .Release.Namespace }}/{{ $fullName }}-ca-cert
+    nginx.ingress.kubernetes.io/auth-tls-secret: {{ .Release.Namespace }}/{{ $fullName }}-ca-secret-cert
     nginx.ingress.kubernetes.io/auth-tls-verify-depth: "1"
     nginx.ingress.kubernetes.io/auth-tls-error-page: "https://{{ (index .Values.ingress.hosts 0).host }}/mtls-error"
     # Pass client certificate info to backend
