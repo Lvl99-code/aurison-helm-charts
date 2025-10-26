@@ -15,7 +15,6 @@ metadata:
     nginx.ingress.kubernetes.io/auth-tls-verify-client: "on"
     nginx.ingress.kubernetes.io/auth-tls-secret: {{ .Release.Namespace }}/{{ if .Values.mtls.existingSecret }}aurison-backend-ca-secret-cert{{ else }}{{ $fullName }}-ca-secret-cert{{ end }}
     nginx.ingress.kubernetes.io/auth-tls-verify-depth: "1"
-    nginx.ingress.kubernetes.io/auth-tls-error-page: "https://{{ (index .Values.ingress.hosts 0).host }}/mtls-error"
     # WebSocket specific settings
     nginx.ingress.kubernetes.io/proxy-read-timeout: "86400"
     nginx.ingress.kubernetes.io/proxy-send-timeout: "86400"
