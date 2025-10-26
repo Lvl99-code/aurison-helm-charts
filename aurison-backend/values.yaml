@@ -113,7 +113,7 @@ affinity: {}
 
 # mTLS Configuration for PACS edge devices
 mtls:
-  enabled: false  # Set to true to enable mTLS for PACS endpoints
+  enabled: true  # Set to true to enable mTLS for PACS endpoints
   # Use existing secret created manually in Kubernetes
   existingSecret: true
   # CA certificate content (will be base64 encoded automatically)

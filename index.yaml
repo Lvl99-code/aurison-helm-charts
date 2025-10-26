@@ -3,7 +3,18 @@ entries:
   aurison-backend:
   - apiVersion: v2
     appVersion: v1.0.20
-    created: "2025-10-26T16:58:47.0480106+01:00"
+    created: "2025-10-26T17:18:12.6261421+01:00"
+    description: Aurison Backend API
+    digest: 210443fb7682cdb68c66a680d1fb9452309e85a93492000ab6ecbc0f5951652a
+    icon: https://www.aurison.app/static/media/logo.a42498c2.png
+    name: aurison-backend
+    type: application
+    urls:
+    - aurison-backend-0.1.25.tgz
+    version: 0.1.25
+  - apiVersion: v2
+    appVersion: v1.0.20
+    created: "2025-10-26T17:18:12.6251131+01:00"
     description: Aurison Backend API
     digest: a08a74cfd917bd562c61b054c9ae01e4fa9a8a0c6c00c93fe3abdb25a62b9db4
     icon: https://www.aurison.app/static/media/logo.a42498c2.png
@@ -14,7 +25,7 @@ entries:
     version: 0.1.24
   - apiVersion: v2
     appVersion: v1.0.20
-    created: "2025-10-26T16:58:47.0469877+01:00"
+    created: "2025-10-26T17:18:12.6119685+01:00"
     description: Aurison Backend API
     digest: 091f7c62b50dc0a4d6e469ab704055b6a277ad3d435a77e537335d7126eb423a
     icon: https://www.aurison.app/static/media/logo.a42498c2.png
@@ -25,7 +36,7 @@ entries:
     version: 0.1.23
   - apiVersion: v2
     appVersion: v1.0.20
-    created: "2025-10-26T16:58:47.0350706+01:00"
+    created: "2025-10-26T17:18:12.6107614+01:00"
     description: Aurison Backend API
     digest: e536b69127fd194b29df304334605be2e28df575c01a404eb25f33fea39d3418
     icon: https://www.aurison.app/static/media/logo.a42498c2.png
@@ -36,7 +47,7 @@ entries:
     version: 0.1.22
   - apiVersion: v2
     appVersion: v1.0.20
-    created: "2025-10-26T16:58:47.0235897+01:00"
+    created: "2025-10-26T17:18:12.6087574+01:00"
     description: Aurison Backend API
     digest: 3ff4ae3469f4f1324ba755eaf9d65bd0f9f5be34be23fe0a864825e6f2a56376
     icon: https://www.aurison.app/static/media/logo.a42498c2.png
@@ -47,7 +58,7 @@ entries:
     version: 0.1.21
   - apiVersion: v2
     appVersion: v1.0.20
-    created: "2025-10-26T16:58:47.011159+01:00"
+    created: "2025-10-26T17:18:12.6067467+01:00"
     description: Aurison Backend API
     digest: 12fdf5636badb06dc7b44e0c54334d093d99d7277cab2bfafda8dfe4530fbdcf
     icon: https://www.aurison.app/static/media/logo.a42498c2.png
@@ -58,7 +69,7 @@ entries:
     version: 0.1.20
   - apiVersion: v2
     appVersion: v1.0.19
-    created: "2025-10-26T16:58:46.9992701+01:00"
+    created: "2025-10-26T17:18:12.6040506+01:00"
     description: Aurison Backend API
     digest: ae3b43a44bd0f9ce049511395c6ae403f3fa31f6dcd284dd7a595f2f309d5dac
     icon: https://www.aurison.app/static/media/logo.a42498c2.png
@@ -69,7 +80,7 @@ entries:
     version: 0.1.19
   - apiVersion: v2
     appVersion: v1.0.18
-    created: "2025-10-26T16:58:46.9882824+01:00"
+    created: "2025-10-26T17:18:12.6020441+01:00"
     description: Aurison Backend API
     digest: 00a09c2d2125b2fab5eec21a1cdd35e0d0f2ca84d49cd1a00db3c9b5f54355b3
     icon: https://www.aurison.app/static/media/logo.a42498c2.png
@@ -80,7 +91,7 @@ entries:
     version: 0.1.18
   - apiVersion: v2
     appVersion: v1.0.17
-    created: "2025-10-26T16:58:46.9756434+01:00"
+    created: "2025-10-26T17:18:12.6010415+01:00"
     description: Aurison Backend API
     digest: 69882191aaaf983a767553755c4dcd5322394bc4498b2a1e519481b286c6ba0f
     icon: https://www.aurison.app/static/media/logo.a42498c2.png
@@ -91,7 +102,7 @@ entries:
     version: 0.1.17
   - apiVersion: v2
     appVersion: v1.0.16
-    created: "2025-10-26T16:58:46.9580558+01:00"
+    created: "2025-10-26T17:18:12.5989186+01:00"
     description: Aurison Backend API
     digest: afba7d09ac6c819ffe31924600f2628ec6657eb9b0eafaa5f2f31ae88c109a1f
     icon: https://www.aurison.app/static/media/logo.a42498c2.png
@@ -102,7 +113,7 @@ entries:
     version: 0.1.16
   - apiVersion: v2
     appVersion: v1.0.15
-    created: "2025-10-26T16:58:46.9450443+01:00"
+    created: "2025-10-26T17:18:12.5956761+01:00"
     description: Aurison Backend API
     digest: 2bde60f78f331425f7bb65e4cd5c8ae049759f5ae10409b86348371b5d5d1fec
     icon: https://www.aurison.app/static/media/logo.a42498c2.png
@@ -113,7 +124,7 @@ entries:
     version: 0.1.15
   - apiVersion: v2
     appVersion: v1.0.14
-    created: "2025-10-26T16:58:46.942476+01:00"
+    created: "2025-10-26T17:18:12.5946534+01:00"
     description: Aurison Backend API
     digest: e9b9d8894562868ac69779f16bca57966189fc4ad084e9265ab66833108b52df
     icon: https://www.aurison.app/static/media/logo.a42498c2.png
@@ -124,7 +135,7 @@ entries:
     version: 0.1.14
   - apiVersion: v2
     appVersion: v1.0.13
-    created: "2025-10-26T16:58:46.9273593+01:00"
+    created: "2025-10-26T17:18:12.592145+01:00"
     description: Aurison Backend API
     digest: b1c253536690da3710184d73c1f1e7beb3e4d8047362b74890cd6452b0720d0b
     icon: https://www.aurison.app/static/media/logo.a42498c2.png
@@ -135,7 +146,7 @@ entries:
     version: 0.1.13
   - apiVersion: v2
     appVersion: v1.0.12
-    created: "2025-10-26T16:58:46.915947+01:00"
+    created: "2025-10-26T17:18:12.5898624+01:00"
     description: Aurison Backend API
     digest: 7a9b6ab95c6a6cc96d15498a69c5b99b5b73b5c7f18ac3b0c33384279667b2b7
     icon: https://www.aurison.app/static/media/logo.a42498c2.png
@@ -146,7 +157,7 @@ entries:
     version: 0.1.12
   - apiVersion: v2
     appVersion: v1.0.11
-    created: "2025-10-26T16:58:46.9028475+01:00"
+    created: "2025-10-26T17:18:12.5883597+01:00"
     description: Aurison Backend API
     digest: 8930e8355129d513e66ed784b956ed6fe0ca63bc3276dd783ee1346b3bdebb18
     icon: https://www.aurison.app/static/media/logo.a42498c2.png
@@ -157,7 +168,7 @@ entries:
     version: 0.1.11
   - apiVersion: v2
     appVersion: v1.0.10
-    created: "2025-10-26T16:58:46.8899062+01:00"
+    created: "2025-10-26T17:18:12.5863099+01:00"
     description: Aurison Backend API
     digest: 6c06ba5fa0f23734f7360f6efbf1f9c73cae61d8066058ce8f6a0f0054ff140e
     icon: https://www.aurison.app/static/media/logo.a42498c2.png
@@ -168,7 +179,7 @@ entries:
     version: 0.1.10
   - apiVersion: v2
     appVersion: v1.0.9
-    created: "2025-10-26T16:58:47.1314807+01:00"
+    created: "2025-10-26T17:18:12.6503956+01:00"
     description: Aurison Backend API
     digest: 8dae495b3895322532ba238ec8fd0f721607f499a868fbaa761d29252e2152a1
     icon: https://www.aurison.app/static/media/logo.a42498c2.png
@@ -179,7 +190,7 @@ entries:
     version: 0.1.9
   - apiVersion: v2
     appVersion: v1.0.8
-    created: "2025-10-26T16:58:47.1196629+01:00"
+    created: "2025-10-26T17:18:12.6483468+01:00"
     description: Aurison Backend API
     digest: 885704434e216991bfb6422b88600826000b3508b7c69f81baf8a7a4ec28a5ba
     icon: https://www.aurison.app/static/media/logo.a42498c2.png
@@ -190,7 +201,7 @@ entries:
     version: 0.1.8
   - apiVersion: v2
     appVersion: v1.0.7
-    created: "2025-10-26T16:58:47.1088752+01:00"
+    created: "2025-10-26T17:18:12.646311+01:00"
     description: Aurison Backend API
     digest: 1d9cc5b764ca1dbe777f455445bf6a6774a5721ee8b25c35ea2f2f36aef06029
     icon: https://www.aurison.app/static/media/logo.a42498c2.png
@@ -201,7 +212,7 @@ entries:
     version: 0.1.7
   - apiVersion: v2
     appVersion: v1.0.6
-    created: "2025-10-26T16:58:47.0968326+01:00"
+    created: "2025-10-26T17:18:12.6432286+01:00"
     description: Aurison Backend API
     digest: ad65902a1b369822ece03e7525047f252589c12a8a20f724dca736e3ddbb35cd
     icon: https://www.aurison.app/static/media/logo.a42498c2.png
@@ -212,7 +223,7 @@ entries:
     version: 0.1.6
   - apiVersion: v2
     appVersion: v1.0.5
-    created: "2025-10-26T16:58:47.0827008+01:00"
+    created: "2025-10-26T17:18:12.6411842+01:00"
     description: Aurison Backend API
     digest: 8d33bcd8ef0ba8cdb35883bf3279c01e3f52994f81d3e32d34d32488d30731c9
     icon: https://www.aurison.app/static/media/logo.a42498c2.png
@@ -223,7 +234,7 @@ entries:
     version: 0.1.5
   - apiVersion: v2
     appVersion: v1.0.4
-    created: "2025-10-26T16:58:47.0718015+01:00"
+    created: "2025-10-26T17:18:12.6396495+01:00"
     description: Aurison Backend API
     digest: 188ddba787a7d6def959cd4d4c04aa2bb01f95525d9a6b3b0244bc09f31cd165
     icon: https://www.aurison.app/static/media/logo.a42498c2.png
@@ -234,7 +245,7 @@ entries:
     version: 0.1.4
   - apiVersion: v2
     appVersion: v1.0.3
-    created: "2025-10-26T16:58:47.0592745+01:00"
+    created: "2025-10-26T17:18:12.6281928+01:00"
     description: Aurison Backend API
     digest: 9346082c53e3c1cfa8ed55e98d76c24f03dc3d3beece697d6e95007a6dd9449b
     icon: https://www.aurison.app/static/media/logo.a42498c2.png
@@ -245,7 +256,7 @@ entries:
     version: 0.1.3
   - apiVersion: v2
     appVersion: v1.0.1
-    created: "2025-10-26T16:58:46.8752583+01:00"
+    created: "2025-10-26T17:18:12.5744446+01:00"
     description: Aurison Backend API
     digest: 79e10cd4e4b938772357b9c0f7b1d6a09116f107222b6cb19c2d587c468b0ff3
     icon: https://www.aurison.app/static/media/logo.a42498c2.png
@@ -254,4 +265,4 @@ entries:
     urls:
     - aurison-backend-0.1.0.tgz
     version: 0.1.0
-generated: "2025-10-26T16:58:46.869939+01:00"
+generated: "2025-10-26T17:18:12.5709209+01:00"
