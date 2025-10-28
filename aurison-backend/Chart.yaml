@@ -4,9 +4,9 @@ description: Aurison Backend API
 icon: https://www.aurison.app/static/media/logo.a42498c2.png
 name: aurison-backend
 type: application
-version: 0.1.26
+version: 0.1.27
 dependencies:
   - name: cert-manager
-    version: v1.13.0
+    version: 1.13.0
     repository: https://charts.jetstack.io
     condition: cert-manager.enabled
