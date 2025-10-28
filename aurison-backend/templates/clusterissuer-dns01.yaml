@@ -1,0 +1,25 @@
+{{- if .Values.certManager.clusterIssuer.enabled }}
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: {{ .Values.certManager.clusterIssuer.name }}
+  labels:
+    {{- include "aurison-backend.labels" . | nindent 4 }}
+spec:
+  acme:
+    server: {{ .Values.certManager.clusterIssuer.acmeServer }}
+    email: {{ .Values.certManager.clusterIssuer.email }}
+    privateKeySecretRef:
+      name: {{ .Values.certManager.clusterIssuer.privateKeySecretName }}
+    solvers:
+    - selector:
+        dnsNames:
+        {{- range .Values.certManager.clusterIssuer.dnsNames }}
+        - {{ . | quote }}
+        {{- end }}
+      dns01:
+        cnameStrategy: {{ .Values.certManager.clusterIssuer.cnameStrategy }}
+        route53:
+          region: {{ .Values.certManager.clusterIssuer.route53.region }}
+          hostedZoneID: {{ .Values.certManager.clusterIssuer.route53.hostedZoneID }}
+{{- end }}

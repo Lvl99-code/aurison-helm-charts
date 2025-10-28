@@ -120,3 +120,29 @@ mtls:
   # DO NOT PUT REAL CERTIFICATES HERE - use existing secret instead
   # caCertificate: ""
   # caPrivateKey: ""
+
+# cert-manager configuration (installed as subchart dependency)
+cert-manager:
+  enabled: true
+  installCRDs: true
+  serviceAccount:
+    annotations:
+      eks.amazonaws.com/role-arn: "arn:aws:iam::937747935506:role/cert-manager-route53"
+  extraArgs:
+    - --dns01-recursive-nameservers-only
+    - --dns01-recursive-nameservers=8.8.8.8:53,1.1.1.1:53
+
+# cert-manager ClusterIssuer configuration (Step 7)
+certManager:
+  clusterIssuer:
+    enabled: true
+    name: letsencrypt-dns01-prod
+    acmeServer: https://acme-v02.api.letsencrypt.org/directory
+    email: david.oluwafemi@aurison.app
+    privateKeySecretName: letsencrypt-dns01-prod-key
+    cnameStrategy: Follow
+    dnsNames:
+      - "pacs.api.aurison.app"
+    route53:
+      region: ap-southeast-2
+      hostedZoneID: Z01940152KCX1GQ8ZY0YM
