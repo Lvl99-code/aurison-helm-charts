@@ -4,7 +4,7 @@ description: Aurison Backend API
 icon: https://www.aurison.app/static/media/logo.a42498c2.png
 name: aurison-backend
 type: application
-version: 0.1.25
+version: 0.1.26
 dependencies:
   - name: cert-manager
     version: v1.13.0

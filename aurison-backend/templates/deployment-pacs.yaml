@@ -62,6 +62,8 @@ spec:
           secret:
             secretName: {{ if .Values.mtls.existingSecret }}aurison-backend-ca-secret-cert{{ else }}{{ include "aurison-backend.fullname" . }}-ca-secret-cert{{ end }}
             items:
+              - key: ca.crt
+                path: ca.crt
               - key: ca-certificate.pem
                 path: ca-certificate.pem
               - key: ca-private-key.pem

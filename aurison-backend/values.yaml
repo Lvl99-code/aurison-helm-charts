@@ -86,6 +86,18 @@ ingress:
       hosts:
         - api.aurison.app
 
+# Ingress for PACS mTLS endpoint (Step 11)
+ingressPacs:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  hosts:
+    - host: pacs.api.aurison.app
+  tls:
+    - secretName: pacs-api-tls  # Certificate from cert-manager via DNS-01
+      hosts:
+        - pacs.api.aurison.app
+
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
@@ -132,7 +144,7 @@ cert-manager:
     - --dns01-recursive-nameservers-only
     - --dns01-recursive-nameservers=8.8.8.8:53,1.1.1.1:53
 
-# cert-manager ClusterIssuer configuration (Step 7)
+# cert-manager ClusterIssuer configuration
 certManager:
   clusterIssuer:
     enabled: true
@@ -146,3 +158,14 @@ certManager:
     route53:
       region: ap-southeast-2
       hostedZoneID: Z01940152KCX1GQ8ZY0YM
+  
+  # Certificate configuration
+  certificate:
+    enabled: true
+    name: pacs-api-tls
+    secretName: pacs-api-tls
+    issuerRef:
+      name: letsencrypt-dns01-prod
+      kind: ClusterIssuer
+    dnsNames:
+      - "pacs.api.aurison.app"

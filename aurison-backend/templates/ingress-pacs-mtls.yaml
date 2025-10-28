@@ -1,6 +1,5 @@
-{{- if and .Values.ingress.enabled .Values.aurisonBackendPacs.enabled .Values.mtls.enabled .Values.ingressPacs.hosts -}}
+{{- if and .Values.ingressPacs.enabled .Values.aurisonBackendPacs.enabled .Values.mtls.enabled -}}
 {{- $fullName := include "aurison-backend.fullname" . -}}
-
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -8,32 +7,26 @@ metadata:
   labels:
     {{- include "aurison-backend.labels" . | nindent 4 }}
   annotations:
-    {{- with .Values.ingressPacs.annotations }}  # <-- CHANGED
-    {{- toYaml . | nindent 4 }}
-    {{- end }}
-    # mTLS specific annotations for NGINX
+    kubernetes.io/ingress.class: nginx
+    # mTLS Configuration - Client Certificate Authentication
     nginx.ingress.kubernetes.io/auth-tls-verify-client: "on"
     nginx.ingress.kubernetes.io/auth-tls-secret: {{ .Release.Namespace }}/{{ if .Values.mtls.existingSecret }}aurison-backend-ca-secret-cert{{ else }}{{ $fullName }}-ca-secret-cert{{ end }}
     nginx.ingress.kubernetes.io/auth-tls-verify-depth: "1"
-    # WebSocket specific settings
+    nginx.ingress.kubernetes.io/auth-tls-pass-certificate-to-upstream: "true"
+    # WebSocket Configuration
     nginx.ingress.kubernetes.io/proxy-read-timeout: "86400"
     nginx.ingress.kubernetes.io/proxy-send-timeout: "86400"
-    nginx.ingress.kubernetes.io/proxy-connect-timeout: "60"
-    # WebSocket upgrade headers
-    nginx.ingress.kubernetes.io/websocket-services: "{{ $fullName }}-pacs"
-    # Pass client certificate info to backend and handle WebSocket upgrades
+    nginx.ingress.kubernetes.io/websocket-services: {{ $fullName }}-pacs
+    # Pass client certificate info to backend
     nginx.ingress.kubernetes.io/configuration-snippet: |
       proxy_set_header Upgrade $http_upgrade;
       proxy_set_header Connection "upgrade";
-      proxy_set_header X-Real-IP $remote_addr;
-      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-      proxy_set_header X-Forwarded-Proto $scheme;
-      proxy_set_header Host $http_host;
       proxy_set_header X-SSL-Client-Certificate $ssl_client_escaped_cert;
       proxy_set_header X-SSL-Client-Verify $ssl_client_verify;
       proxy_set_header X-SSL-Client-S-DN $ssl_client_s_dn;
 spec:
-  {{- if .Values.ingressPacs.tls }}  # <-- CHANGED
+  ingressClassName: nginx
+  {{- if .Values.ingressPacs.tls }}
   tls:
     {{- range .Values.ingressPacs.tls }}
     - hosts:
@@ -44,7 +37,7 @@ spec:
     {{- end }}
   {{- end }}
   rules:
-    {{- range .Values.ingressPacs.hosts }}  # <-- CHANGED
+    {{- range .Values.ingressPacs.hosts }}
     - host: {{ .host | quote }}
       http:
         paths:
