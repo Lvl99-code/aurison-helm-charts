@@ -15,7 +15,7 @@ metadata:
     {{- if .Values.mtls.enabled }}
     # mTLS Configuration - optional globally, enforced on specific path
     nginx.ingress.kubernetes.io/auth-tls-verify-client: "optional"
-    nginx.ingress.kubernetes.io/auth-tls-secret: {{ .Release.Namespace }}/{{ if .Values.mtls.existingSecret }}{{ .Values.mtls.existingSecretName }}{{ else }}{{ $fullName }}-ca-secret-cert{{ end }}
+    nginx.ingress.kubernetes.io/auth-tls-secret: {{ .Release.Namespace }}/{{ if .Values.mtls.existingSecret }}{{ .Values.mtls.existingSecretName | default "aurison-backend-ca-secret-cert" }}{{ else }}{{ $fullName }}-ca-secret-cert{{ end }}
     nginx.ingress.kubernetes.io/auth-tls-verify-depth: "1"
     {{- end }}
     # WebSocket support

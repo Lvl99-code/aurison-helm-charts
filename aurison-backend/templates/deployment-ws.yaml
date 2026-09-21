@@ -68,7 +68,7 @@ spec:
       volumes:
         - name: ca-cert-volume
           secret:
-            secretName: {{ if .Values.mtls.existingSecret }}{{ .Values.mtls.existingSecretName }}{{ else }}{{ include "aurison-backend.fullname" . }}-ca-secret-cert{{ end }}
+            secretName: {{ if .Values.mtls.existingSecret }}{{ .Values.mtls.existingSecretName | default "aurison-backend-ca-secret-cert" }}{{ else }}{{ include "aurison-backend.fullname" . }}-ca-secret-cert{{ end }}
       {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
