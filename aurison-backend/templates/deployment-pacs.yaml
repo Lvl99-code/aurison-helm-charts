@@ -7,6 +7,7 @@ metadata:
     {{- include "aurison-backend.labels" . | nindent 4 }}
     app: aurison-backend-pacs
 spec:
+  minReadySeconds: 10
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.aurisonBackendPacs.replicaCount | default 1 }}
   {{- end }}
@@ -22,6 +23,7 @@ spec:
       labels:
         app: aurison-backend-pacs
     spec:
+      terminationGracePeriodSeconds: 60
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
@@ -33,6 +35,10 @@ spec:
         - name: {{ .Chart.Name }}-pacs
           command: 
             {{- toYaml .Values.aurisonBackendPacs.command | nindent 12 }}
+          lifecycle:
+            preStop:
+              exec:
+                command: ["/bin/sh", "-c", "sleep 15"]
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"

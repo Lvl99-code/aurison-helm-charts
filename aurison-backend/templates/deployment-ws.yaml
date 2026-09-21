@@ -4,13 +4,16 @@ metadata:
   name: {{ include "aurison-backend.fullname" . }}-ws
   labels:
     {{- include "aurison-backend.labels" . | nindent 4 }}
+    app: aurison-prod-backend-ws
     app: aurison-backend-ws
 spec:
+  minReadySeconds: 10
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
+      app: aurison-prod-backend-ws
       app: aurison-backend-ws
   template:
     metadata:
@@ -19,8 +22,10 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
+        app: aurison-prod-backend-ws
         app: aurison-backend-ws
     spec:
+      terminationGracePeriodSeconds: 60
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
@@ -32,6 +37,10 @@ spec:
         - name: {{ .Chart.Name }}-ws
           command: 
             {{- toYaml .Values.aurisonBackendWs.command | nindent 12 }}
+          lifecycle:
+            preStop:
+              exec:
+                command: ["/bin/sh", "-c", "sleep 15"]
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
@@ -40,8 +49,27 @@ spec:
             - name: websocket
               containerPort: 8001
               protocol: TCP
+          {{- if .Values.mtls.enabled }}
+          volumeMounts:
+            - name: ca-cert-volume
+              mountPath: /app/certs/
+              readOnly: true
+          env:
+            - name: MTLS_CA_CERT_PATH
+              value: "/app/certs/ca-certificate.pem"
+            - name: MTLS_CA_KEY_PATH
+              value: "/app/certs/ca-private-key.pem"
+            - name: MTLS_ENABLED
+              value: "true"
+          {{- end }}
           resources:
             {{- toYaml .Values.aurisonBackendWs.resources | nindent 12 }}
+      {{- if .Values.mtls.enabled }}
+      volumes:
+        - name: ca-cert-volume
+          secret:
+            secretName: {{ if .Values.mtls.existingSecret }}{{ .Values.mtls.existingSecretName }}{{ else }}{{ include "aurison-backend.fullname" . }}-ca-secret-cert{{ end }}
+      {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

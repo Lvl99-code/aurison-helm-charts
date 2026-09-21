@@ -1,0 +1,16 @@
+{{- if and .Values.ingress.enabled .Values.aurisonBackendPacs.enabled .Values.mtls.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: websocket-headers
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "aurison-backend.labels" . | nindent 4 }}
+data:
+  Upgrade: $http_upgrade
+  Connection: "upgrade"
+  X-Real-IP: $remote_addr
+  X-Forwarded-For: $proxy_add_x_forwarded_for
+  X-Forwarded-Proto: $scheme
+  Host: $http_host
+{{- end }}

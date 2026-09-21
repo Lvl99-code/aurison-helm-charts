@@ -1,0 +1,74 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  name: aurison-prod-backend
+  namespace: argocd
+spec:
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+  destination:
+    namespace: aurison
+    server: 'https://kubernetes.default.svc'
+  project: default
+  source:
+    chart: aurison-backend
+    targetRevision: 0.1.*
+    repoURL: https://lvl99-code.github.io/aurison-helm-charts/
+    helm:
+      values: |
+        replicaCount: 1
+        image:
+          repository: 937747935506.dkr.ecr.ap-southeast-2.amazonaws.com/aurison-backend
+          tag: "43c89778b7d0f700cb262454d40724515b95f211"
+
+        aurisonBackend:
+          command: 
+            - sh
+            - -c
+            - python manage.py collectstatic --noinput ; python manage.py migrate ; python manage.py runserver 0.0.0.0:8000
+          resources:
+            limits:
+              memory: 2Gi
+            requests:
+              cpu: 600m
+              memory: 500Mi
+
+        aurisonBackendWs:
+          command: 
+            - sh
+            - -c 
+            - python manage.py collectstatic --noinput ; python manage.py migrate ; daphne -b 0.0.0.0 -p 8001 asteris.asgi:application
+          resources:
+            limits:
+              memory: 2Gi
+            requests:
+              cpu: 100m
+              memory: 600Mi
+
+        ingress:
+          enabled: true
+          annotations:
+              nginx.ingress.kubernetes.io/proxy-body-size: 100000000000m
+              nginx.org/client-max-body-size: 100000000000m
+              cert-manager.io/cluster-issuer: letsencrypt-prod
+              certmanager.k8s.io/cluster-issuer: letsencrypt-prod
+              kubernetes.io/ingress.class: nginx
+              kubernetes.io/tls-acme: "true"
+          hosts:
+            - host: api.aurison.app
+              paths:
+              - path: /
+                backend:
+                  serviceName: aurison-backend
+                  servicePort: 80
+              - path: /ws/
+                backend:
+                  serviceName: aurison-backend-ws
+                  servicePort: 80
+          tls:
+            - secretName: aurison-backend-tls
+              hosts:
+                - api.aurison.app
