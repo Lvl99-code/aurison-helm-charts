@@ -128,8 +128,6 @@ mtls:
   enabled: true  # Set to true to enable mTLS for PACS endpoints
   # Use existing secret created manually in Kubernetes
   existingSecret: true
-  # Name of that manually created secret (see mTLS-CNAME-delegation.md Step 16)
-  existingSecretName: aurison-backend-ca-secret-cert
   # CA certificate content (will be base64 encoded automatically)
   # DO NOT PUT REAL CERTIFICATES HERE - use existing secret instead
   # caCertificate: ""
