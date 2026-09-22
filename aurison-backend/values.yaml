@@ -4,6 +4,14 @@
 
 replicaCount: 1
 
+# Rolling update overlap. The old pod keeps serving while ingress
+# picks up the new pod. preStopSleepSeconds must stay below
+# terminationGracePeriodSeconds (the grace period includes the sleep).
+rollout:
+  minReadySeconds: 10
+  terminationGracePeriodSeconds: 60
+  preStopSleepSeconds: 15
+
 image:
   repository: harbor.palaceworld.net/aurison/backend
   pullPolicy: IfNotPresent

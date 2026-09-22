@@ -10,6 +10,12 @@ spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.aurisonBackendPacs.replicaCount | default 1 }}
   {{- end }}
+  minReadySeconds: {{ .Values.rollout.minReadySeconds }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
   selector:
     matchLabels:
       app: aurison-backend-pacs
@@ -26,6 +32,7 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      terminationGracePeriodSeconds: {{ .Values.rollout.terminationGracePeriodSeconds }}
       serviceAccountName: {{ include "aurison-backend.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
@@ -33,6 +40,10 @@ spec:
         - name: {{ .Chart.Name }}-pacs
           command: 
             {{- toYaml .Values.aurisonBackendPacs.command | nindent 12 }}
+          lifecycle:
+            preStop:
+              exec:
+                command: ["/bin/sh", "-c", "sleep {{ .Values.rollout.preStopSleepSeconds }}"]
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
